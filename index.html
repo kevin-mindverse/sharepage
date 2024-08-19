@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embed Mindos Share</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="mindosFrame"></iframe>
+
+    <script>
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function setIframeSrc() {
+            const mindId = getQueryParameter('mindId');
+            if (mindId) {
+                const iframe = document.getElementById('mindosFrame');
+                iframe.src = `https://mindos.com/share/${mindId}`;
+            } else {
+                console.error('未提供 mindId 参数');
+            }
+        }
+
+        window.onload = setIframeSrc;
+    </script>
+</body>
+</html>
